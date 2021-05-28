@@ -10,7 +10,7 @@ Scenario: The manager has a page for selecting clients to communicate with them
 	And Manager has list with clients
 	Then page with list of clients is displayed
 
-@p2 @clientsPage @smoke
+@p3 @clientsPage @smoke 
 Scenario: Chat with client opens if manager clicks on the line with client and chat feature turned on
 	Given Manager exists
 	And Client with name 'Lilit' exists
@@ -20,7 +20,7 @@ Scenario: Chat with client opens if manager clicks on the line with client and c
 	When I click on line with name 'Lilit'
 	Then Chat with client 'Lilit' is open
 
-@p2 @clientsPage
+@p3 @clientsPage @negative
 Scenario: Chat with client doesn't open if manager clicks on the line with client and chat feature turned off
 	Given Manager exists
 	And Client with name 'Lilit' exists
