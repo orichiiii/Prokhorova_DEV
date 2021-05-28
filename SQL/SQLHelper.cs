@@ -74,15 +74,15 @@ namespace SQL.Tests
                 parametersToDelete += $" {key}={value},";
             }
 
-            var deleteParameters = parametersToDelete.TrimEnd(',');
-            deleteParameters += " where";
+            var updateParameters = parametersToDelete.TrimEnd(',');
+            updateParameters += " where";
 
             foreach (var (key, value) in conditions)
             {
-                deleteParameters += $" {key}={value}";
+                updateParameters += $" {key}={value} and";
             }
 
-            var command = new SqlCommand(deleteParameters,
+            var command = new SqlCommand(updateParameters.Substring(0, parametersToDelete.Length - 5),
                 _sqlConnection);
             command.ExecuteNonQuery();
         }
