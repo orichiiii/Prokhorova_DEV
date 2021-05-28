@@ -110,3 +110,19 @@ Scenario: The message is not sent if the "message" field is empty
 	When I click 'Open chat' button
 	And I click 'Sent' button
 	Then Message is not sent
+
+@p3 @sendMessage @smoke
+Scenario Outline: the manager can send a message to the user regardless of the user's status
+	Given User exists 
+	And User is logged in as client
+	And Manager exists
+	And Manager is <status>
+	And Chat feature turned on
+	And Chat with manager is open at client app
+	When I enter 'Hello!' at message field
+	And I click 'Sent' button
+	Then Message sent
+Examples:
+	| status  |
+	| offline |
+	| online  |
