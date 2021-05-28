@@ -55,6 +55,7 @@ Scenario Outline: User can see the manager's status
 	Given User exists
 	And User is logged in as client
 	And Chat feature turned on
+	And Manager exists
 	And Manager is <status>
 	And Client App is open
 	When I open the chat with manager
@@ -84,6 +85,8 @@ Scenario: Button 'Open Chat' is displayed
 Scenario: User has notification when manager sent message if user is online
 	Given User exists
 	And User is logged in as client
+	And Manager exists
+	And Chat feature turned on
 	And Manager send message 'Hello!' to user
 	And User is online
 	Then pop-up with manager's message 'Hello!' is displayed on user's screen
@@ -93,6 +96,7 @@ Scenario: User has no notification when manager sent message if user is offline
 	Given User exists
 	And User is logged in as client
 	And Chat feature turned on
+	And Manager exists
 	And Manager send message 'Hello!' to user
 	And User is offline
 	Then pop-up with manager's message is not displayed on user's screen
