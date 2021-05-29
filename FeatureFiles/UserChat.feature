@@ -4,7 +4,7 @@ Feature: UserChat
 	As a client app user
 	I want a chat function
 
-@p2 @positive @openChat
+@p1 @positive @openChat
 Scenario: It is possible to open chat as authorized client
 	Given User exists
 	And User is logged in as client
@@ -20,25 +20,18 @@ Scenario: It is impossible to open chat as non-authorized client
 	And Client App is open
 	Then "Open chat" button is not displayed
 
-@p4 @sendMessage @positive @smoke
+@p1 @sendMessage @positive @smoke
 Scenario Outline: It is possible to send message to manager
 	Given User exists
 	And User is logged in as client
 	And Manager exists
 	And Chat feature turned on
 	And Chat is open
-	When I enter '<text>' at message field
+	When I enter 'Hello!' at message field
 	And I click 'Sent' button
 	Then Message sent
-Examples:
-	| text                        |
-	| Hello!                      |
-	| 1234567890                  |
-	| Hello1234                   |
-	| !@#$%^&*()_+                |
-	| Hello!@#$%^&*()_+1234567890 |
 
-@p2 @chatHistory @positive
+@p1 @chatHistory @positive
 Scenario: Chat history is saved if user close the application
 	Given User exists
 	And User is logged in as client
@@ -50,7 +43,7 @@ Scenario: Chat history is saved if user close the application
 	And I click 'Open chat' button
 	Then Previous message 'Hello!' is displayed at the chat
 
-@p2 @managerStatus @positive
+@p3 @managerStatus @positive
 Scenario Outline: User can see the manager's status
 	Given User exists
 	And User is logged in as client
@@ -65,23 +58,22 @@ Examples:
 	| online  |
 	| offline |
 
-@p3 @openChat @negative @exceptionMessage
-Scenario: Exception message is displayed if the chat feature is disabled
+@p2 @openChat @negative @exceptionMessage
+Scenario: Chat icon is not displayed if the chat feature is disabled
 	Given User exists
 	And User is logged in as client
 	And Chat feature turned off
 	And Client App is open
-	When I click 'Open chat' button
-	Then Exception message 'page not found' is displayed
+	Then Chat icon is not displayed
 
-@p2 @chatButton
+@p3 @chatButton
 Scenario: Button 'Open Chat' is displayed
 	Given User exists
 	And User is logged in as client
 	And Client App is open
 	Then Button 'Open Chat' is displayed in the lower right corner
 
-@p2 @notifications
+@p1 @notifications
 Scenario: User has notification when manager sent message if user is online
 	Given User exists
 	And User is logged in as client
@@ -91,7 +83,7 @@ Scenario: User has notification when manager sent message if user is online
 	And User is online
 	Then pop-up with manager's message 'Hello!' is displayed on user's screen
 
-@p2 @notifications
+@p1 @notifications
 Scenario: User has no notification when manager sent message if user is offline
 	Given User exists
 	And User is logged in as client
@@ -111,7 +103,7 @@ Scenario: The message is not sent if the "message" field is empty
 	And I click 'Sent' button
 	Then Message is not sent
 
-@p3 @sendMessage @smoke
+@p1 @sendMessage @smoke
 Scenario Outline: the manager can send a message to the user regardless of the user's status
 	Given User exists 
 	And User is logged in as client
