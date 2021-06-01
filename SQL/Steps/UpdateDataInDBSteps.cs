@@ -8,7 +8,7 @@ namespace SQL.Tests.Steps
     public class UpdateDataInDBSteps
     {
         private readonly ScenarioContext _scenarioContext;
-        private static SqlHelper _sqlHelper;
+        private SqlHelper _sqlHelper;
 
         public UpdateDataInDBSteps(ScenarioContext scenarioContext)
         {
@@ -27,6 +27,13 @@ namespace SQL.Tests.Steps
             _sqlHelper.OpenConnection();
         }
 
+        [Given(@"product with parameters Name = (.*), Count = (.*), Id = (.*) exist in table")]
+        public void GivenProductWithParametersNameCountIdExistInTable(string name, string count, string id)
+        {
+            _sqlHelper.Insert("Products", new Dictionary<string, string> { { "Name", name }, { "Count", count }, { "Id", id } });
+        }
+
+
         [Given(@"table Products with parameters Id, Name, Count exist in data base")]
         public void GivenTableShopWithParametersIdNameCountExistInDataBase()
         {
@@ -40,12 +47,11 @@ namespace SQL.Tests.Steps
         }
 
         [Then(@"succesfully updated table with data Name = (.*) and Count = (.*)")]
-        public void ThenSuccesfullyUpdatedTableWithDataNameAndCount(string name, string count, string conditionName, string condition)
+        public void ThenSuccesfullyUpdatedTableWithDataNameAndCount(string name, string count)
         {
             var res = _sqlHelper.IsRowExistedInTable("Products", new Dictionary<string, string> { { "Name", name }, { "Count", count } });
 
             Assert.True(res);
         }
-
     }
 }

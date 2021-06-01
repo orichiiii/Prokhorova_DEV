@@ -54,10 +54,10 @@ namespace SQL.Tests
             var whereParameters = string.Empty;
 
             foreach (var (key, value) in parameters)
-                whereParameters += $" and {key}={value}";
+                whereParameters += $"{key}={value} and ";
 
             var sqlDataAdapter = new SqlDataAdapter(
-                $"select * from {table} where {whereParameters.Substring(5)}",
+                $"select * from {table} where {whereParameters.Substring(0, whereParameters.Length - 4)}",
                 _sqlConnection);
             var dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
@@ -70,19 +70,16 @@ namespace SQL.Tests
             var parametersToDelete = $"update {table} set";
 
             foreach (var (key, value) in parameters)
-            {
                 parametersToDelete += $" {key}={value},";
-            }
+
 
             var updateParameters = parametersToDelete.TrimEnd(',');
             updateParameters += " where";
 
             foreach (var (key, value) in conditions)
-            {
                 updateParameters += $" {key}={value} and";
-            }
 
-            var command = new SqlCommand(updateParameters.Substring(0, parametersToDelete.Length - 5),
+            var command = new SqlCommand(updateParameters.Substring(0, updateParameters.Length - 4),
                 _sqlConnection);
             command.ExecuteNonQuery();
         }
@@ -92,9 +89,8 @@ namespace SQL.Tests
             var parametersToDelete = $"delete from {table} where ";
 
             foreach (var (key, value) in parameters)
-            {
                 parametersToDelete += $"{key}={value} and ";
-            }
+
 
             var command = new SqlCommand(parametersToDelete.Substring(0, parametersToDelete.Length - 5),
                 _sqlConnection);
