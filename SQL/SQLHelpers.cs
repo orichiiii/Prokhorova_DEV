@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SQL.Tests
+namespace SQL
 {
     public class SqlHelper
     {
@@ -94,6 +95,32 @@ namespace SQL.Tests
 
             var command = new SqlCommand(parametersToDelete.Substring(0, parametersToDelete.Length - 5),
                 _sqlConnection);
+            command.ExecuteNonQuery();
+        }
+
+        public bool IsTableExistInDB()
+        {
+            try
+            {
+                string strCheck = "SELECT * FROM Products WHERE 1 = 0";
+
+                var command = new SqlCommand(strCheck, _sqlConnection);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        public void CreateTableInDB()
+        {
+            var command = new SqlCommand("CREATE TABLE Products (" +
+                "[Id] VARCHAR(40), " +
+                "[Name] VARCHAR(40), " +
+                "[Count] VARCHAR(40))", _sqlConnection);
+
             command.ExecuteNonQuery();
         }
     }

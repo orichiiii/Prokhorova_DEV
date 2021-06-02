@@ -20,15 +20,15 @@ namespace SQL.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("UpdateDataInDB")]
-    [NUnit.Framework.CategoryAttribute("update")]
-    public partial class UpdateDataInDBFeature
+    [NUnit.Framework.DescriptionAttribute("Create, Update, Delete data in db")]
+    [NUnit.Framework.CategoryAttribute("CreateUpdateDelete")]
+    public partial class CreateUpdateDeleteDataInDbFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = new string[] {
-                "update"};
+                "CreateUpdateDelete"};
         
 #line 1 "CRUD.feature"
 #line hidden
@@ -37,8 +37,8 @@ namespace SQL.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "UpdateDataInDB", null, ProgrammingLanguage.CSharp, new string[] {
-                        "update"});
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Create, Update, Delete data in db", null, ProgrammingLanguage.CSharp, new string[] {
+                        "CreateUpdateDelete"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -77,15 +77,17 @@ namespace SQL.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("update data in db using conditions")]
+        [NUnit.Framework.DescriptionAttribute("Update existing data in DB using conditions")]
         [NUnit.Framework.CategoryAttribute("positive")]
+        [NUnit.Framework.CategoryAttribute("updaeData")]
         [NUnit.Framework.TestCaseAttribute("\'Apple\'", "2000", "Name", "\'Test\'", null)]
         [NUnit.Framework.TestCaseAttribute("\'PinApple\'", "1", "Count", "400", null)]
         [NUnit.Framework.TestCaseAttribute("\'Watermelon\'", "7465869", "Id", "1", null)]
-        public virtual void UpdateDataInDbUsingConditions(string new_Name, string new_Count, string conditions_Name, string conditions, string[] exampleTags)
+        public virtual void UpdateExistingDataInDBUsingConditions(string new_Name, string new_Count, string conditions_Name, string conditions, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "positive"};
+                    "positive",
+                    "updaeData"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -96,7 +98,7 @@ namespace SQL.Features
             argumentsOfScenario.Add("new_count", new_Count);
             argumentsOfScenario.Add("conditions_name", conditions_Name);
             argumentsOfScenario.Add("conditions", conditions);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("update data in db using conditions", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update existing data in DB using conditions", null, tagsOfScenario, argumentsOfScenario);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -120,14 +122,176 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  testRunner.Given("data base is connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+#line 7
+ testRunner.And("table Products with parameters Id, Name, Count exist in data base", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 8
  testRunner.And("product with parameters Name = \'Test\', Count = 400, Id = 1 exist in table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
- testRunner.Given(string.Format("update parameters Name to {0} and Count to {1} where condition {2} = {3}", new_Name, new_Count, conditions_Name, conditions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When(string.Format("update parameters Name to {0} and Count to {1} where condition {2} = {3}", new_Name, new_Count, conditions_Name, conditions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
  testRunner.Then(string.Format("succesfully updated table with data Name = {0} and Count = {1}", new_Name, new_Count), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Add new data in DB")]
+        [NUnit.Framework.CategoryAttribute("positive")]
+        [NUnit.Framework.CategoryAttribute("addData")]
+        [NUnit.Framework.TestCaseAttribute("\'Apple\'", "123", "0", null)]
+        [NUnit.Framework.TestCaseAttribute("\'PinApple\'", "1", "1234567890", null)]
+        [NUnit.Framework.TestCaseAttribute("\'Watermelon\'", "1234567890", "1", null)]
+        public virtual void AddNewDataInDB(string name, string count, string id, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "positive",
+                    "addData"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("name", name);
+            argumentsOfScenario.Add("count", count);
+            argumentsOfScenario.Add("id", id);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add new data in DB", null, tagsOfScenario, argumentsOfScenario);
+#line 18
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 19
+ testRunner.Given("data base is connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 20
+ testRunner.And("table Products with parameters Id, Name, Count exist in data base", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 21
+ testRunner.When(string.Format("add new product with Name {0}, Count {1} and Id {2}", name, count, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 22
+ testRunner.Then(string.Format("succesfully added new product with Name {0}, Count {1} and Id {2}", name, count, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete existing data in db")]
+        [NUnit.Framework.CategoryAttribute("positive")]
+        [NUnit.Framework.CategoryAttribute("addData")]
+        public virtual void DeleteExistingDataInDb()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "positive",
+                    "addData"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete existing data in db", null, tagsOfScenario, argumentsOfScenario);
+#line 30
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 31
+ testRunner.Given("data base is connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 32
+ testRunner.And("product with parameters Name = \'Test\', Count = 400, Id = 1 exist in table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 33
+ testRunner.And("table Products with parameters Id, Name, Count exist in data base", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 34
+ testRunner.When("delete product with conditions Name = \'Test\', Count = 400, Id = 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 35
+ testRunner.Then("succesfully deleted product with parameters Name = \'Test\', Count = 400, Id = 1 fr" +
+                        "om table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete data with invalid parameters type")]
+        [NUnit.Framework.CategoryAttribute("positive")]
+        [NUnit.Framework.CategoryAttribute("addData")]
+        public virtual void DeleteDataWithInvalidParametersType()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "positive",
+                    "addData"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete data with invalid parameters type", null, tagsOfScenario, argumentsOfScenario);
+#line 38
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 39
+ testRunner.Given("data base is connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 40
+ testRunner.And("product with parameters Name = \'Test\', Count = 400, Id = 1 exist in table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 41
+ testRunner.And("table Products with parameters Id, Name, Count exist in data base", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 42
+ testRunner.When("delete product with conditions Name = \'T\', Count = !@#, Id = 99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 43
+ testRunner.Then("exception message Incorrect syntax near \'!\'. is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
